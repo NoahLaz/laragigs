@@ -88,6 +88,10 @@ class ListingController extends Controller
             abort(403, 'Unauthorized Action');
         }
         
+        if ($listing->logo) {
+            unlink(public_path() . '/storage/' . $listing->logo);
+        }
+        
         $listing->delete();
         return redirect('/')->with('message', 'Listing deleted successfully');
     }
